@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import gameBoard from '../features/TicTac';
+import CurrentPlayer from '../features/CurrentPlayer';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    TicTac: gameBoard,
+    CurrentPlayer
   },
 });
