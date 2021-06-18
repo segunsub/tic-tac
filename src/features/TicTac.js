@@ -1,5 +1,4 @@
 import {  createSlice } from '@reduxjs/toolkit';
-
 const initialState = Array(9).fill(null)
 
 export const tic_tac_toe = createSlice({
@@ -9,9 +8,10 @@ export const tic_tac_toe = createSlice({
   reducers: {
     click: (state,action) => {
       state[action.payload.index] = action.payload.player;
+      return state;
     },
     reset: (state) => {
-      state = Array(9).fill(null);
+      return Array(9).fill(null);
     }
   },
 
