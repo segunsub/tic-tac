@@ -16,22 +16,23 @@ function Square(props) {
           dispatch(click({index: props.sqr, player: count.CurrentPlayer}))
           count.CurrentPlayer === 'X' ? dispatch(switchP('O')) : dispatch(switchP('X'))
         }
-
-       if(!store.getState().TicTac.includes(null)) {
+        Patterns.forEach(winMove => {
+          const player =  count.CurrentPlayer
+            let winner =  true
+            winMove.forEach(index => {
+              if(store.getState().TicTac[index] !== player) {
+                 winner = false
+              }
+            })
+            if(winner) {
+              dispatch(updateGame(true))
+            }
+        } )
+       if(!store.getState().TicTac.includes(null) && !store.getState().GameOver.gameOver ) {
+        //  console.log(count.GameOver.gameOver,store.getState().GameOver.gameOver)
         dispatch(tieGame(true))
        } 
-      Patterns.forEach(winMove => {
-        const player =  count.CurrentPlayer
-          let winner =  true
-          winMove.forEach(index => {
-            if(store.getState().TicTac[index] !== player) {
-               winner = false
-            }
-          })
-          if(winner) {
-            dispatch(updateGame(true))
-          }
-      } )
+  
     }
     return (
         <button className="square" onClick={makeMove}>
