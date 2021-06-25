@@ -5,10 +5,9 @@ export const tic_tac_toe = createSlice({
   name: 'board',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {
-    click: (state,action) => {
+  reducers: { 
+    click: (state,action) => {   
       state[action.payload.index] = action.payload.player;
-      return state;
     },
     reset: (state) => {
       return Array(9).fill(null);
@@ -18,6 +17,7 @@ export const tic_tac_toe = createSlice({
 });
 
 export const { click,reset } = tic_tac_toe.actions;
+// console.log(tic_tac_toe.actions.curState())
 
 export const currentBoard = (state) => state;
 

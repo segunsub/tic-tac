@@ -5,8 +5,8 @@ import GameOver from '../features/GameOver';
 
 export const store = configureStore({
   reducer: {
-    TicTac: gameBoard,
-    CurrentPlayer,
-    GameOver
+    ticTac: gameBoard,
+    currentPlayer:CurrentPlayer,
+    gameOverSlice:GameOver
   },
 });

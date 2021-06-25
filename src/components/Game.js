@@ -6,7 +6,7 @@ import { currentBoard} from '../features/TicTac.js';
 
 function Game() {
     const dispatch = useDispatch();
-    const player = useSelector(currentBoard);
+    const state = useSelector(currentBoard);
     function resetGame () {
         dispatch(reset())
         dispatch(tieGame(false))
@@ -15,9 +15,9 @@ function Game() {
         <div className="game">
             <div className="game-board">
                <h1>Tic Tac Toe</h1>
-               <h2>{!player.GameOver.gameOver ? `Next Player:${player.CurrentPlayer}` : player.GameOver.tie ?`Tie Game` : player.CurrentPlayer === 'X' ? `Winner : O` :  `Winner : X` }</h2>
+               <h2>{!state.gameOverSlice.gameOver ? `Next Player:${state.currentPlayer}` : state.gameOverSlice.tie ?`Tie Game` : state.currentPlayer === 'X' ? `Winner : O` :  `Winner : X` }</h2>
                 <Board/>
-                {player.GameOver.gameOver ? <button onClick={resetGame}>Reset</button> : null}
+                {state.gameOverSlice.gameOver ? <button onClick={resetGame}>Reset</button> : null}
             </div>
             
         </div>
