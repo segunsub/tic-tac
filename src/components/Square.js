@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { click, currentBoard} from '../features/TicTac.js';
 import { switchP } from '../features/CurrentPlayer';
 import { Patterns } from './pattern.js';
-import {store} from '../app/store'
 import { updateGame,tieGame } from '../features/GameOver.js';
 function Square(props) {
   
@@ -12,23 +11,27 @@ function Square(props) {
     const dispatch = useDispatch();
   
     function makeMove() {
-        if(state.ticTac[props.sqr] === null && !state.gameOverSlice.gameOver) {
+      const newBoard = [...state.ticTac]
+      let gameOver = state.gameOverSlice.gameOver
+        if(state.ticTac[props.sqr] === null && !gameOver) {
+          newBoard[props.sqr] = state.currentPlayer
           dispatch(click({index: props.sqr, player: state.currentPlayer}))
           state.currentPlayer === 'X' ? dispatch(switchP('O')) : dispatch(switchP('X'))
         }
         Patterns.forEach(winMove => {
           const player =  state.currentPlayer
-            let winner =  true
+          let winner =  true
             winMove.forEach(index => {
-              if(store.getState().ticTac[index] !== player) {
+              if(newBoard[index] !== player) {
                  winner = false
               }
             })
             if(winner) {
               dispatch(updateGame(true))
+              gameOver = !gameOver
             }
         } )
-       if(!store.getState().ticTac.includes(null) && !store.getState().gameOverSlice.gameOver ) {
+       if(!newBoard.includes(null) && !gameOver ) {
         dispatch(tieGame(true))
        } 
   
